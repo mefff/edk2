@@ -870,6 +870,7 @@ class Build():
 
                     PcdMa.CreateCodeFile(False)
                     PcdMa.CreateMakeFile(False,GenFfsList = DataPipe.Get("FfsCommand").get((PcdMa.MetaFile.Path, PcdMa.Arch),[]))
+                    PcdMa.CreateCoSWIDFile()
                     PcdMa.CreateAsBuiltInf()
                     # Force cache miss for PCD driver
                     if GlobalData.gBinCacheSource and self.Target in [None, "", "all"]:
