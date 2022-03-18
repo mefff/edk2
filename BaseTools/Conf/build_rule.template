@@ -387,7 +387,8 @@
         -$(CP) $(DEBUG_DIR)(+)$(MODULE_NAME).debug $(BIN_DIR)(+)$(MODULE_NAME_GUID).debug
 
         "$(GENFW)" -e $(MODULE_TYPE) -o ${dst} ${src} $(GENFW_FLAGS)
-	uswid --verbose --load $(WORKSPACE)(+)Conf(+)sbom.ini --load $(MODULE_NAME).ini --save ${dst}
+	bash $(WORKSPACE)(+)scripts(+)edition.sh $(OUTPUT_DIR) $(MODULE_NAME)
+	uswid --verbose --load $(WORKSPACE)(+)Conf(+)sbom.ini --load $(MODULE_NAME).ini --load $(OUTPUT_DIR)(+)$(MODULE_NAME).ini --save ${dst}
         $(CP) ${dst} $(DEBUG_DIR)
         $(CP) ${dst} $(BIN_DIR)(+)$(MODULE_NAME_GUID).efi
         -$(CP) $(DEBUG_DIR)(+)*.map $(OUTPUT_DIR)
