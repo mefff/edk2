@@ -2,6 +2,7 @@ import configparser
 from os import path
 import subprocess
 
+
 class ModuleCoSWID(object):
     '''Create a per-module ini file with SBOM related data
 
@@ -9,6 +10,7 @@ class ModuleCoSWID(object):
     versioned by git
 
     '''
+
     def __init__(self, ModuleAutoGen):
         self.Name = ModuleAutoGen.Name
         self.Guid = ModuleAutoGen.Guid
