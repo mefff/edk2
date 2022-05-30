@@ -369,6 +369,9 @@
     <InputFile>
         ?.dll
 
+    <ExtraDependency>
+	$(OUTPUT_DIR)(+)headers.txt
+
     <OutputFile>
         $(OUTPUT_DIR)(+)$(MODULE_NAME).efi
 
