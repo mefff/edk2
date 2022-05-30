@@ -1,12 +1,12 @@
 import configparser
-import os.path as path
+from os import path
 import subprocess
 
 class ModuleCoSWID(object):
     '''Create a per-module ini file with SBOM related data
 
-    Also try to get the git HEAD commit hash if the project versioned
-    by git
+    Also try to get the git HEAD commit hash if the project is
+    versioned by git
 
     '''
     def __init__(self, ModuleAutoGen):
