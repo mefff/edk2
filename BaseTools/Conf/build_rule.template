@@ -154,8 +154,10 @@
         *.h, *.H
 
     <OutputFile>
+        $(OUTPUT_DIR)(+)headers.txt
 
     <Command>
+	echo ${src} >> ${dst}
 
 [Assembly-Code-File.COMMON.COMMON]
     <InputFile.MSFT, InputFile.INTEL, InputFile.RVCT>
