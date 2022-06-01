@@ -1,4 +1,3 @@
-import configparser
 from os import path
 import subprocess
 
@@ -29,17 +28,16 @@ class ModuleCoSWID(object):
 
         self.FilePath = path.join(ModuleAutoGen.BuildDir, self.Name + ".ini")
 
-    def Generate(self):
-        config = configparser.ConfigParser()
+        self.content = None
 
-        config["uSWID"] = {
-            "tag-id": self.Guid,
-            "software-name": self.Name,
-            "software-version": self.Version,
-        }
+    def Generate(self):
+        self.content = "\n".join([
+            "[uSWID]",
+            f"tag-id = {self.Guid}",
+            f"software-name = {self.Name}",
+            f"software-version = {self.Version}",
+            ""
+        ])
 
         if self.colloquial_version is not None:
-            config["uSWID"]["colloquial-version"] = self.colloquial_version
-
-        with open(self.FilePath, 'w') as f:
-            config.write(f)
+            self.content += f"colloquial-version = {self.colloquial_version}\n"

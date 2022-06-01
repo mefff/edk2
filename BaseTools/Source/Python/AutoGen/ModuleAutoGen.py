@@ -1797,6 +1797,7 @@ class ModuleAutoGen(AutoGen):
     def CreateCoSWIDFile(self):
         coSWID = GenCoSWID.ModuleCoSWID(self)
         coSWID.Generate()
+        SaveFileOnChange(coSWID.FilePath, coSWID.content, False)
 
     def CopyBinaryFiles(self):
         for File in self.Module.Binaries:
