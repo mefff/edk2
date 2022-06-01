@@ -1,13 +1,14 @@
 #!/bin/bash
 
-set -e
+set -xe -o pipefail
 
 output_dir="${1:?}"
 module_name="${2:?}"
 
-sources_list="$(ar tf "${output_dir}/${module_name}.lib" | while read -a obj; do
-		   cat "${output_dir}/${obj[@]}.src"
-	       done)"
+
+sources_list="$(while read -a obj; do
+		    cat ${obj}.src
+		done < ${output_dir}/object_files.lst)"
 
 headers_list="$(tr ' ' '\n' < ${output_dir}/headers.txt)"
 
