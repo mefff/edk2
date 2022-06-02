@@ -5,21 +5,15 @@ set -xe -o pipefail
 output_dir="${1:?}"
 module_name="${2:?}"
 
-
-sources_list="$(while read -a obj; do
-		    cat ${obj}.src
-		done < ${output_dir}/object_files.lst)"
-
-headers_list="$(tr ' ' '\n' < ${output_dir}/headers.txt)"
-
-files_list="$(printf "%s\n%s" "$sources_list" "$headers_list")"
-
-edition="$(echo $files_list | \
-	      sort | \
+edition="$(cat "${output_dir}/source_files.lst" "${output_dir}/header_files.lst" | \
+	      tr ' ' '\n' | \
+	      sort -u | \
 	      tee "${module_name}.files" | \
 	      xargs cat | \
 	      sha256sum | \
 	      cut -d' ' -f 1)"
+
+echo "${module_name} | ${edition}"
 
 cat <<EOF > "${output_dir}/${module_name}.ini"
 [uSWID]
