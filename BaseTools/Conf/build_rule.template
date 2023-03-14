@@ -130,7 +130,6 @@
 
     <Command.GCC>
         "$(CC)" $(DEPS_FLAGS) $(CC_FLAGS) -c -o ${dst} $(INC) ${src}
-	echo ${src} >> $(OUTPUT_DIR)(+)${s_dir}(+)source_files.lst
 
     <Command.XCODE>
         "$(CC)" $(DEPS_FLAGS) $(CC_FLAGS) -o ${dst} $(INC) ${src}
@@ -153,10 +152,8 @@
         *.h, *.H
 
     <OutputFile>
-        $(OUTPUT_DIR)(+)header_files.lst
 
     <Command>
-	echo ${src} >> ${dst}
 
 [Assembly-Code-File.COMMON.COMMON]
     <InputFile.MSFT, InputFile.INTEL>
@@ -176,7 +173,6 @@
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --source-code --convert-hex --trim-long -o ${d_path}(+)${s_base}.iiii ${d_path}(+)${s_base}.ii
         "$(ASM)" /Fo${dst} $(ASM_FLAGS) /I${s_path} $(INC) ${d_path}(+)${s_base}.iiii
-	echo ${src} >> $(OUTPUT_DIR)(+)${s_dir}(+)source_files.lst
 
     <Command.GCC>
         Trim --asm-file -o ${d_path}(+)${s_base}.i -i $(INC_LIST) ${src}
@@ -231,7 +227,6 @@
         "$(PP)" $(DEPS_FLAGS) $(PP_FLAGS) $(INC) ${src} > ${d_path}(+)${s_base}.ii
         Trim --trim-long --source-code -o ${d_path}(+)${s_base}.iii ${d_path}(+)${s_base}.ii
         "$(NASM)" -I${s_path}(+) $(NASM_INC) $(NASM_FLAGS) -o $dst ${d_path}(+)${s_base}.iii
-	echo ${src} >> $(OUTPUT_DIR)(+)${s_dir}(+)source_files.lst
 
 [Device-Tree-Source-File]
     <InputFile>
@@ -345,9 +340,6 @@
     <InputFile>
         ?.dll
 
-    <ExtraDependency>
-	$(OUTPUT_DIR)(+)header_files.lst
-
     <OutputFile>
         $(OUTPUT_DIR)(+)$(MODULE_NAME).efi
         $(DEBUG_DIR)(+)$(MODULE_NAME).efi
@@ -370,7 +362,6 @@
         -$(CP) $(DEBUG_DIR)(+)$(MODULE_NAME).debug $(BIN_DIR)(+)$(MODULE_NAME_GUID).debug
 
         "$(GENFW)" -e $(MODULE_TYPE) -o ${dst} ${src} $(GENFW_FLAGS)
-	bash $(WORKSPACE)(+)scripts(+)edition.sh $(OUTPUT_DIR) $(MODULE_NAME)
 	uswid --verbose --load $(WORKSPACE)(+)Conf(+)sbom.ini --load $(MODULE_NAME).ini --load $(OUTPUT_DIR)(+)$(MODULE_NAME).ini --save ${dst}
         $(CP) ${dst} $(DEBUG_DIR)
         $(CP) ${dst} $(BIN_DIR)(+)$(MODULE_NAME_GUID).efi
