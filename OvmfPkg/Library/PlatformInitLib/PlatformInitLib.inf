@@ -47,9 +47,11 @@
   HobLib
   QemuFwCfgLib
   QemuFwCfgSimpleParserLib
+  MemoryAllocationLib
   MtrrLib
   PcdLib
   PciLib
+  PeiHardwareInfoLib
 
 [LibraryClasses.X64]
   TdxLib
@@ -95,6 +97,8 @@
   gUefiOvmfPkgTokenSpaceGuid.PcdGuidedExtractHandlerTableSize
 
   gUefiOvmfPkgTokenSpaceGuid.PcdTdxAcceptPageSize
+  gUefiOvmfPkgTokenSpaceGuid.PcdOvmfFlashNvStorageVariableBase
+  gUefiOvmfPkgTokenSpaceGuid.PcdCfvRawDataSize
 
 [FeaturePcd]
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplSwitchToLongMode

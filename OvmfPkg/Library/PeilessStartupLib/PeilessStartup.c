@@ -20,7 +20,6 @@
 #include <ConfidentialComputingGuestAttr.h>
 #include <Guid/MemoryTypeInformation.h>
 #include <OvmfPlatforms.h>
-#include <Library/SecMeasurementLib.h>
 #include "PeilessStartupInternal.h"
 
 #define GET_GPAW_INIT_STATE(INFO)  ((UINT8) ((INFO) & 0x3f))
@@ -43,6 +42,7 @@ InitializePlatform (
   )
 {
   UINT32  LowerMemorySize;
+  VOID    *VariableStore;
 
   DEBUG ((DEBUG_INFO, "InitializePlatform in Pei-less boot\n"));
   PlatformDebugDumpCmos ();
@@ -79,6 +79,12 @@ InitializePlatform (
     PlatformInfoHob->Uc32Size,
     LowerMemorySize
     ));
+
+  VariableStore                                  = PlatformReserveEmuVariableNvStore ();
+  PlatformInfoHob->PcdEmuVariableNvStoreReserved = (UINT64)(UINTN)VariableStore;
+ #ifdef SECURE_BOOT_FEATURE_ENABLED
+  PlatformInitEmuVariableNvStore (VariableStore);
+ #endif
 
   if (TdIsEnabled ()) {
     PlatformTdxPublishRamRegions ();
@@ -176,14 +182,6 @@ PeilessStartup (
     //
     Status = MeasureHobList (VmmHobList);
     if (EFI_ERROR (Status)) {
-      ASSERT (FALSE);
-      CpuDeadLoop ();
-    }
-
-    //
-    // Validate Tdx CFV
-    //
-    if (!TdxValidateCfv (CfvBase, FixedPcdGet32 (PcdCfvRawDataSize))) {
       ASSERT (FALSE);
       CpuDeadLoop ();
     }

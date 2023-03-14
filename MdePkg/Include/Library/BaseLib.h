@@ -6,6 +6,7 @@ Copyright (c) 2006 - 2021, Intel Corporation. All rights reserved.<BR>
 Portions copyright (c) 2008 - 2009, Apple Inc. All rights reserved.<BR>
 Copyright (c) Microsoft Corporation.<BR>
 Portions Copyright (c) 2020, Hewlett Packard Enterprise Development LP. All rights reserved.<BR>
+Portions Copyright (c) 2022, Loongson Technology Corporation Limited. All rights reserved.<BR>
 
 SPDX-License-Identifier: BSD-2-Clause-Patent
 
@@ -151,6 +152,29 @@ typedef struct {
 #define BASE_LIBRARY_JUMP_BUFFER_ALIGNMENT  8
 
 #endif // defined (MDE_CPU_RISCV64)
+
+#if defined (MDE_CPU_LOONGARCH64)
+///
+/// The LoongArch architecture context buffer used by SetJump() and LongJump()
+///
+typedef struct {
+  UINT64    S0;
+  UINT64    S1;
+  UINT64    S2;
+  UINT64    S3;
+  UINT64    S4;
+  UINT64    S5;
+  UINT64    S6;
+  UINT64    S7;
+  UINT64    S8;
+  UINT64    SP;
+  UINT64    FP;
+  UINT64    RA;
+} BASE_LIBRARY_JUMP_BUFFER;
+
+#define BASE_LIBRARY_JUMP_BUFFER_ALIGNMENT  8
+
+#endif // defined (MDE_CPU_LOONGARCH64)
 
 //
 // String Services
@@ -4503,6 +4527,40 @@ CalculateCrc32 (
   IN  UINTN  Length
   );
 
+/**
+   Calculates the CRC16-ANSI checksum of the given buffer.
+
+   @param[in]      Buffer        Pointer to the buffer.
+   @param[in]      Length        Length of the buffer, in bytes.
+   @param[in]      InitialValue  Initial value of the CRC.
+
+   @return The CRC16-ANSI checksum.
+**/
+UINT16
+EFIAPI
+CalculateCrc16Ansi (
+  IN  CONST VOID  *Buffer,
+  IN  UINTN       Length,
+  IN  UINT16      InitialValue
+  );
+
+/**
+   Calculates the CRC32c checksum of the given buffer.
+
+   @param[in]      Buffer        Pointer to the buffer.
+   @param[in]      Length        Length of the buffer, in bytes.
+   @param[in]      InitialValue  Initial value of the CRC.
+
+   @return The CRC32c checksum.
+**/
+UINT32
+EFIAPI
+CalculateCrc32c (
+  IN CONST VOID  *Buffer,
+  IN UINTN       Length,
+  IN UINT32      InitialValue
+  );
+
 //
 // Base Library CPU Functions
 //
@@ -4512,7 +4570,6 @@ CalculateCrc32 (
 
   @param  Context1        Context1 parameter passed into SwitchStack().
   @param  Context2        Context2 parameter passed into SwitchStack().
-
 **/
 typedef
 VOID
