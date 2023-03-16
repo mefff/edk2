@@ -97,6 +97,7 @@ class PlatformAutoGen(AutoGen):
         self.MetaFile = PlatformFile
         self.Workspace = Workspace
         self.WorkspaceDir = Workspace.WorkspaceDir
+        self.TopLevelSbom = Workspace.TopLevelSbom
         self.ToolChain = Toolchain
         self.BuildTarget = Target
         self.Arch = Arch

@@ -126,7 +126,8 @@ class MemoryDataPipe(DataPipe):
             "BuildRuleFile":PlatformInfo.BuildRule,
             "Arch": PlatformInfo.Arch,
             "ArchList":PlatformInfo.Workspace.ArchList,
-            "ActivePlatform":PlatformInfo.MetaFile
+            "ActivePlatform":PlatformInfo.MetaFile,
+            "TopLevelSbom":PlatformInfo.TopLevelSbom,
             }
         self.DataContainer = {'P_Info':PInfo}
 

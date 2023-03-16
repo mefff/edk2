@@ -42,6 +42,7 @@ class TargetTxtClassObject(object):
             DataType.TAB_TAT_DEFINES_TOOL_CHAIN_TAG                             : [],
             DataType.TAB_TAT_DEFINES_TARGET_ARCH                                : [],
             DataType.TAB_TAT_DEFINES_BUILD_RULE_CONF                            : '',
+            DataType.TAB_TAT_DEFINES_TOP_LEVEL_SBOM                             : '',
         }
         self.ConfDirectoryPath = ""
         if Filename is not None:
@@ -98,7 +99,8 @@ class TargetTxtClassObject(object):
                 Value = ""
 
             if Key in [DataType.TAB_TAT_DEFINES_ACTIVE_PLATFORM, DataType.TAB_TAT_DEFINES_TOOL_CHAIN_CONF, \
-                       DataType.TAB_TAT_DEFINES_ACTIVE_MODULE, DataType.TAB_TAT_DEFINES_BUILD_RULE_CONF]:
+                       DataType.TAB_TAT_DEFINES_ACTIVE_MODULE, DataType.TAB_TAT_DEFINES_BUILD_RULE_CONF,
+                       DataType.TAB_TAT_DEFINES_TOP_LEVEL_SBOM]:
                 self.TargetTxtDictionary[Key] = Value.replace('\\', '/')
                 if Key == DataType.TAB_TAT_DEFINES_TOOL_CHAIN_CONF and self.TargetTxtDictionary[Key]:
                     if self.TargetTxtDictionary[Key].startswith("Conf/"):

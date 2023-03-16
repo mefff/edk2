@@ -74,6 +74,10 @@ class WorkspaceAutoGen(AutoGen):
         self.UniFlag        = UniFlag
 
         self.TargetTxt      = BuildConfig
+        self.TopLevelSbom   = self._TopLevelSbomAbsPath(
+            self.WorkspaceDir,
+            self.TargetTxt.TargetTxtDictionary[TAB_TAT_DEFINES_TOP_LEVEL_SBOM]
+        )
         self.ToolDef        = ToolDefinition
         self.FdfFile        = FlashDefinitionFile
         self.FdTargetList   = Fds if Fds else []
@@ -133,6 +137,10 @@ class WorkspaceAutoGen(AutoGen):
         self.CreateBuildOptionsFile()
         self.CreatePcdTokenNumberFile()
         self.GeneratePlatformLevelHash()
+
+    @staticmethod
+    def _TopLevelSbomAbsPath(WorkspaceDir, TopLevelSbomDir):
+        return os.path.join(WorkspaceDir, TopLevelSbomDir)
 
     #
     # Merge Arch

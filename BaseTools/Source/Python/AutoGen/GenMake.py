@@ -690,7 +690,7 @@ cleanlib:
             "architecture"              : MyAgo.Arch,
             "toolchain_tag"             : MyAgo.ToolChain,
             "build_target"              : MyAgo.BuildTarget,
-            "top_level_sbom"            : os.path.join(GlobalData.gConfDirectory, 'top_level_sbom.ini'),
+            "top_level_sbom"            : MyAgo.TopLevelSbom,
 
             "platform_build_directory"  : self.PlatformInfo.BuildDir,
             "module_build_directory"    : MyAgo.BuildDir,
@@ -1328,7 +1328,7 @@ ${BEGIN}\t-@${create_directory_command}\n${END}\
             "architecture"              : MyAgo.Arch,
             "toolchain_tag"             : MyAgo.ToolChain,
             "build_target"              : MyAgo.BuildTarget,
-            "top_level_sbom"            : os.path.join(GlobalData.gConfDirectory, 'top_level_sbom.ini'),
+            "top_level_sbom"            : MyAgo.TopLevelSbom,
 
             "platform_build_directory"  : self.PlatformInfo.BuildDir,
             "module_build_directory"    : MyAgo.BuildDir,
@@ -1514,7 +1514,7 @@ cleanlib:
 
             "toolchain_tag"             : MyAgo.ToolChain,
             "build_target"              : MyAgo.BuildTarget,
-            "top_level_sbom"            : os.path.join(GlobalData.gConfDirectory, 'top_level_sbom.ini'),
+            "top_level_sbom"            : MyAgo.TopLevelSbom,
             "shell_command_code"        : list(self._SHELL_CMD_[self._Platform].keys()),
             "shell_command"             : list(self._SHELL_CMD_[self._Platform].values()),
             "build_architecture_list"   : MyAgo.Arch,
@@ -1645,7 +1645,7 @@ class TopLevelMakefile(BuildFile):
             "platform_version"          : MyAgo.Version,
             "platform_build_directory"  : MyAgo.BuildDir,
             "conf_directory"            : GlobalData.gConfDirectory,
-            "top_level_sbom"            : os.path.join(GlobalData.gConfDirectory, 'top_level_sbom.ini'),
+            "top_level_sbom"            : MyAgo.TopLevelSbom,
 
             "toolchain_tag"             : MyAgo.ToolChain,
             "build_target"              : MyAgo.BuildTarget,

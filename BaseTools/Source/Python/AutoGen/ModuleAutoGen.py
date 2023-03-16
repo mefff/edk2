@@ -223,6 +223,7 @@ class ModuleAutoGen(AutoGen):
 
         self.Workspace = Workspace
         self.WorkspaceDir = ""
+        self.TopLevelSbom = DataPipe.Get("P_Info").get("TopLevelSbom")
         self.PlatformInfo = None
         self.DataPipe = DataPipe
         self.__init_platform_info__()

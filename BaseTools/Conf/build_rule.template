@@ -363,7 +363,7 @@
         -$(CP) $(DEBUG_DIR)(+)$(MODULE_NAME).debug $(BIN_DIR)(+)$(MODULE_NAME_GUID).debug
 
         "$(GENFW)" -e $(MODULE_TYPE) -o ${dst} ${src} $(GENFW_FLAGS)
-	# -uswid --verbose --load $(TOP_LEVEL_SBOM) --load $(MODULE_NAME).ini --save ${dst}
+	uswid --load $(TOP_LEVEL_SBOM) --load $(MODULE_NAME).ini --save ${dst}
         $(CP) ${dst} $(DEBUG_DIR)
         $(CP) ${dst} $(BIN_DIR)(+)$(MODULE_NAME_GUID).efi
         -$(CP) $(DEBUG_DIR)(+)*.map $(OUTPUT_DIR)
