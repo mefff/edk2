@@ -293,6 +293,7 @@ ARCH = ${architecture}
 TOOLCHAIN = ${toolchain_tag}
 TOOLCHAIN_TAG = ${toolchain_tag}
 TARGET = ${build_target}
+TOP_LEVEL_SBOM = ${top_level_sbom}
 
 #
 # Build Directory Macro Definition
@@ -689,6 +690,7 @@ cleanlib:
             "architecture"              : MyAgo.Arch,
             "toolchain_tag"             : MyAgo.ToolChain,
             "build_target"              : MyAgo.BuildTarget,
+            "top_level_sbom"            : os.path.join(GlobalData.gConfDirectory, 'top_level_sbom.ini'),
 
             "platform_build_directory"  : self.PlatformInfo.BuildDir,
             "module_build_directory"    : MyAgo.BuildDir,
@@ -1201,6 +1203,7 @@ ARCH = ${architecture}
 TOOLCHAIN = ${toolchain_tag}
 TOOLCHAIN_TAG = ${toolchain_tag}
 TARGET = ${build_target}
+TOP_LEVEL_SBOM = ${top_level_sbom}
 
 #
 # Build Directory Macro Definition
@@ -1325,6 +1328,7 @@ ${BEGIN}\t-@${create_directory_command}\n${END}\
             "architecture"              : MyAgo.Arch,
             "toolchain_tag"             : MyAgo.ToolChain,
             "build_target"              : MyAgo.BuildTarget,
+            "top_level_sbom"            : os.path.join(GlobalData.gConfDirectory, 'top_level_sbom.ini'),
 
             "platform_build_directory"  : self.PlatformInfo.BuildDir,
             "module_build_directory"    : MyAgo.BuildDir,
@@ -1370,6 +1374,7 @@ PLATFORM_OUTPUT_DIR = ${platform_output_directory}
 TOOLCHAIN = ${toolchain_tag}
 TOOLCHAIN_TAG = ${toolchain_tag}
 TARGET = ${build_target}
+TOP_LEVEL_SBOM = ${top_level_sbom}
 
 #
 # Build Directory Macro Definition
@@ -1509,6 +1514,7 @@ cleanlib:
 
             "toolchain_tag"             : MyAgo.ToolChain,
             "build_target"              : MyAgo.BuildTarget,
+            "top_level_sbom"            : os.path.join(GlobalData.gConfDirectory, 'top_level_sbom.ini'),
             "shell_command_code"        : list(self._SHELL_CMD_[self._Platform].keys()),
             "shell_command"             : list(self._SHELL_CMD_[self._Platform].values()),
             "build_architecture_list"   : MyAgo.Arch,
@@ -1639,6 +1645,7 @@ class TopLevelMakefile(BuildFile):
             "platform_version"          : MyAgo.Version,
             "platform_build_directory"  : MyAgo.BuildDir,
             "conf_directory"            : GlobalData.gConfDirectory,
+            "top_level_sbom"            : os.path.join(GlobalData.gConfDirectory, 'top_level_sbom.ini'),
 
             "toolchain_tag"             : MyAgo.ToolChain,
             "build_target"              : MyAgo.BuildTarget,

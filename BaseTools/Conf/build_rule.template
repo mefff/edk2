@@ -69,6 +69,7 @@
 #   $(ARCH)             Architecture of current module
 #   $(TOOLCHAIN)        Toolchain used to build current module
 #   $(TARGET)           Target of current module (DEBUG/RELEASE)
+#   $(TOP_LEVEL_SBOM)   Top level SBOM file
 #   $(<tool>)           Path of tool
 #   $(EDK_TOOLS_PATH)   Path of build tools
 #   $(<FILE_TYPES>)     File list of each file type
@@ -362,7 +363,7 @@
         -$(CP) $(DEBUG_DIR)(+)$(MODULE_NAME).debug $(BIN_DIR)(+)$(MODULE_NAME_GUID).debug
 
         "$(GENFW)" -e $(MODULE_TYPE) -o ${dst} ${src} $(GENFW_FLAGS)
-	uswid --verbose --load $(WORKSPACE)(+)Conf(+)sbom.ini --load $(MODULE_NAME).ini --load $(OUTPUT_DIR)(+)$(MODULE_NAME).ini --save ${dst}
+	# -uswid --verbose --load $(TOP_LEVEL_SBOM) --load $(MODULE_NAME).ini --save ${dst}
         $(CP) ${dst} $(DEBUG_DIR)
         $(CP) ${dst} $(BIN_DIR)(+)$(MODULE_NAME_GUID).efi
         -$(CP) $(DEBUG_DIR)(+)*.map $(OUTPUT_DIR)
